@@ -54,10 +54,10 @@ public class DanglaMenuSample : MonoBehaviour {
 		isLaunchGameScene = UserSettings.isLaunchGameScene;
 
 		if( null == hologlaManager ){
-			hologlaManager = GameObject.FindObjectOfType<HologlaCameraManager>( );
+			hologlaManager = GameObject.FindFirstObjectByType<HologlaCameraManager>( );
 		}
 		if( null == hologlaInput ){
-			hologlaInput = GameObject.FindObjectOfType<HologlaInput>( );
+			hologlaInput = GameObject.FindFirstObjectByType<HologlaInput>( );
 		}
 		RegisterMenuTransReset( );
 		ResetMenuPosition( );

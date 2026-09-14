@@ -37,14 +37,13 @@ public class SceneInitializeMenu
 		}
 		//iOSを64bitに設定.
 		//0 - None, 1 - ARM64, 2 - Universal..
-		if( 1 != PlayerSettings.GetArchitecture(BuildTargetGroup.iOS) ){
-			PlayerSettings.SetArchitecture(BuildTargetGroup.iOS, 1);
+		if( 1 != PlayerSettings.GetArchitecture(NamedBuildTarget.iOS) ){
+			PlayerSettings.SetArchitecture(NamedBuildTarget.iOS, 1);
 		}
-
 		//====================Android用====================.
 		//AndroidのMinSDKVersionが低い場合はARCore向けに対応しているバージョンにする.
-		if( AndroidSdkVersions.AndroidApiLevel24 > PlayerSettings.Android.minSdkVersion ){
-			PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel24;
+		if( AndroidSdkVersions.AndroidApiLevel25 > PlayerSettings.Android.minSdkVersion ){
+			PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel25;
 		}
 		//ARCore向けにVulkenを使用しないようにする.
 		if( true == PlayerSettings.GetGraphicsAPIs(BuildTarget.Android).Contains(UnityEngine.Rendering.GraphicsDeviceType.Vulkan) ) {
@@ -52,8 +51,8 @@ public class SceneInitializeMenu
 			PlayerSettings.SetGraphicsAPIs(BuildTarget.Android, graphicsDeviceTypeArray);
 		}
 		//ARM64向けにビルドさせるためにScriptBackendをIL2CPPにする.
-		if( ScriptingImplementation.IL2CPP != PlayerSettings.GetScriptingBackend(BuildTargetGroup.Android) ) {
-			PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, ScriptingImplementation.IL2CPP);
+		if( ScriptingImplementation.IL2CPP != PlayerSettings.GetScriptingBackend(NamedBuildTarget.Android) ) {
+			PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
 		}
 		//ARM64向けにビルドさせる設定にする.
 		if( 0 == (PlayerSettings.Android.targetArchitectures & AndroidArchitecture.ARM64) ){
@@ -89,7 +88,7 @@ public class SceneInitializeMenu
 		ApplyHologlaInputSetting(hologlaCameraManager, hologlaInput.GetComponent<HologlaInput>( ));
 
 		//AR機能利用用にARSession用コンポーネントの有無を確認し、ない場合は生成する.
-		if( 0 == GameObject.FindObjectsOfType<UnityEngine.XR.ARFoundation.ARSession>().Length ){
+		if( null == GameObject.FindAnyObjectByType<UnityEngine.XR.ARFoundation.ARSession>() ){
 			//ARSession用オブジェクトを生成する(4.1.5現在、メニューから追加できるGameObjectのARSessionと同じもの).
 			ObjectFactory.CreateGameObject("AR Session", typeof(UnityEngine.XR.ARFoundation.ARSession), typeof(UnityEngine.XR.ARFoundation.ARInputManager));
 		}
