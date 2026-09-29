@@ -282,6 +282,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 23470196759212312}
+        m_TargetAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
@@ -299,6 +300,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 23470196759212312}
+        m_TargetAssemblyTypeName: UnityEngine.MeshRenderer, UnityEngine
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
